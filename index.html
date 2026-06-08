@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blank Axes Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="panel">
+      <div class="panel__header">
+        <p class="eyebrow">Worksheet Tool</p>
+        <h1>Blank Axes Generator</h1>
+        <p class="intro">Generate clean Cartesian or polar axes as SVG for worksheets, slides, or printouts.</p>
+      </div>
+
+      <form id="controls" class="controls">
+        <label class="field">
+          <span>Axis type</span>
+          <select id="axisType" name="axisType">
+            <option value="cartesian">Cartesian</option>
+            <option value="polar">Polar</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Canvas size</span>
+          <select id="canvasSize" name="canvasSize">
+            <option value="square">Square</option>
+            <option value="landscape">Landscape</option>
+            <option value="portrait">Portrait</option>
+          </select>
+        </label>
+
+        <div class="field-grid cartesian-only">
+          <label class="field">
+            <span>X min</span>
+            <input id="xMin" name="xMin" type="number" value="-10">
+          </label>
+          <label class="field">
+            <span>X max</span>
+            <input id="xMax" name="xMax" type="number" value="10">
+          </label>
+          <label class="field">
+            <span>Y min</span>
+            <input id="yMin" name="yMin" type="number" value="-10">
+          </label>
+          <label class="field">
+            <span>Y max</span>
+            <input id="yMax" name="yMax" type="number" value="10">
+          </label>
+          <label class="field">
+            <span>Grid step</span>
+            <input id="gridStep" name="gridStep" type="number" min="0.1" step="any" value="1">
+          </label>
+          <label class="field">
+            <span>X-axis label</span>
+            <input id="cartesianXAxisLabel" name="cartesianXAxisLabel" type="text" value="x">
+          </label>
+          <label class="field">
+            <span>Y-axis label</span>
+            <input id="cartesianYAxisLabel" name="cartesianYAxisLabel" type="text" value="y">
+          </label>
+        </div>
+
+        <div class="field-grid polar-only hidden">
+          <label class="field">
+            <span>Rings</span>
+            <input id="ringCount" name="ringCount" type="number" min="1" max="24" value="8">
+          </label>
+          <label class="field">
+            <span>Max radius label</span>
+            <input id="polarRadiusMax" name="polarRadiusMax" type="number" min="1" value="8">
+          </label>
+          <label class="field">
+            <span>Angle step</span>
+            <select id="angleStep" name="angleStep">
+              <option value="15">15&deg;</option>
+              <option value="30" selected>30&deg;</option>
+              <option value="45">45&deg;</option>
+              <option value="60">60&deg;</option>
+              <option value="90">90&deg;</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Horizontal label</span>
+            <input id="polarXAxisLabel" name="polarXAxisLabel" type="text" value="Re z">
+          </label>
+          <label class="field">
+            <span>Vertical label</span>
+            <input id="polarYAxisLabel" name="polarYAxisLabel" type="text" value="Im z">
+          </label>
+        </div>
+
+        <div class="field-grid">
+          <label class="field checkbox">
+            <input id="showGrid" name="showGrid" type="checkbox" checked>
+            <span>Show grid</span>
+          </label>
+          <label class="field checkbox">
+            <input id="showTicks" name="showTicks" type="checkbox" checked>
+            <span>Show ticks</span>
+          </label>
+          <label class="field checkbox">
+            <input id="showNumbers" name="showNumbers" type="checkbox">
+            <span>Show numbers</span>
+          </label>
+          <label class="field">
+            <span>Label every</span>
+            <input id="labelEvery" name="labelEvery" type="number" min="1" value="1">
+          </label>
+        </div>
+
+        <div class="actions">
+          <button type="submit">Render axes</button>
+          <button type="button" id="downloadSvg" class="ghost">Download SVG</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="preview-card">
+      <div class="preview-card__header">
+        <h2>Preview</h2>
+        <p>SVG output scales cleanly for print.</p>
+      </div>
+      <div id="preview" class="preview"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
