@@ -4,6 +4,7 @@ const axisTypeField = document.getElementById("axisType");
 const cartesianFields = document.querySelector(".cartesian-only");
 const polarFields = document.querySelector(".polar-only");
 const downloadButton = document.getElementById("downloadSvg");
+const downloadPngButton = document.getElementById("downloadPng");
 
 let currentSvg = "";
 
@@ -37,6 +38,50 @@ downloadButton.addEventListener("click", () => {
   link.download = `blank-${axisTypeField.value}-axes.svg`;
   link.click();
   URL.revokeObjectURL(url);
+});
+
+downloadPngButton.addEventListener("click", () => {
+  if (!currentSvg) {
+    return;
+  }
+
+  const img = new Image();
+  const blob = new Blob([currentSvg], { type: "image/svg+xml;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  img.onload = () => {
+    // 3x multiplier to ensure the rasterized PNG remains high-res/crisp
+    const scale = 3;
+    const config = readConfig();
+    const canvas = document.createElement("canvas");
+    canvas.width = config.width * scale;
+    canvas.height = config.height * scale;
+
+    const ctx = canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    canvas.toBlob((pngBlob) => {
+      if (pngBlob) {
+        const pngUrl = URL.createObjectURL(pngBlob);
+        const link = document.createElement("a");
+        link.href = pngUrl;
+        link.download = `blank-${axisTypeField.value}-axes.png`;
+        link.click();
+        URL.revokeObjectURL(pngUrl);
+      }
+      URL.revokeObjectURL(url);
+    }, "image/png");
+  };
+
+  img.onerror = (err) => {
+    console.error("Error generating PNG:", err);
+    URL.revokeObjectURL(url);
+  };
+
+  img.src = url;
 });
 
 for (const element of form.elements) {

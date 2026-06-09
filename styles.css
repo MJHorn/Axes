@@ -128,7 +128,14 @@ select {
 }
 
 .actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.export-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
 

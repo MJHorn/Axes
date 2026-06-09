@@ -8,7 +8,7 @@ A lightweight, modern web-based utility for generating clean, custom Cartesian a
 - **Polar Axes**: Custom ring counts, angle step size (15°, 30°, 45°, 60°, 90°), and horizontal/vertical labels.
 - **Grid Options**: Show/hide grids, tick marks, and axis numbering with custom step intervals (label frequency).
 - **Responsive Layout Options**: Presets for Square, Landscape, and Portrait canvases.
-- **SVG Export**: Download your custom configurations as clean, vector-based SVG files ready for embedding or printing.
+- **Multi-Format Export**: Download your configurations as clean, vector-based SVG files or high-resolution PNG images for maximum compatibility.
 - **Modern UI**: Dark/glassmorphic responsive layout with real-time SVG previews.
 
 ## Project Structure
